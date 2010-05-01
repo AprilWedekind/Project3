@@ -1,0 +1,33 @@
+<p>
+<b>Topic:</b>
+<%=h @topic.name %> - <%=h @topic.description %>
+</p>
+
+<% unless @topic.posts.empty? %>
+<h2>Posts</h2>
+<% @topic.posts.each do |post| %>
+<b><%= link_to post.subject, [@topic, post] %></b><br />
+<% end %>
+<% end %>
+
+<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to 'Back', topics_path %>
+
+<h2>New Post</h2>
+<% @post = Post.new %>
+<% form_for([@topic, @post])  do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :subject %><br />
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+

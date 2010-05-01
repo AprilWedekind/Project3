@@ -1,0 +1,675 @@
+  [4;36;1mSQL (0.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (16.0ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateTopics (20100501010112)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mCREATE TABLE "topics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100501010112')[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("topics")[0m
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-04-30 21:04:16) [GET]
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 234ms (View: 218, DB: 0) | 200 OK [http://localhost/topics]
+  [4;36;1mSQL (0.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateTopics (20100501010112)
+Migrating to CreatePosts (20100501010545)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "topic_id" integer, "subject" varchar(255), "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100501010545')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("posts")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("topics")[0m
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-04-30 21:26:58) [GET]
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 280ms (View: 171, DB: 0) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-04-30 21:27:18) [GET]
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 16ms (View: 0, DB: 0) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#new (for 127.0.0.1 at 2010-04-30 21:27:23) [GET]
+Rendering template within layouts/topics
+Rendering topics/new
+Completed in 110ms (View: 94, DB: 0) | 200 OK [http://localhost/topics/new]
+
+
+Processing TopicsController#create (for 127.0.0.1 at 2010-04-30 21:27:43) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic"=>{"name"=>"test topic", "description"=>"tutorial test"}}
+  [4;36;1mTopic Create (0.0ms)[0m   [0;1mINSERT INTO "topics" ("name", "created_at", "updated_at", "description") VALUES('test topic', '2010-05-01 01:27:43', '2010-05-01 01:27:43', 'tutorial test')[0m
+Redirected to http://localhost:3000/topics/1
+Completed in 16ms (DB: 0) | 302 Found [http://localhost/topics]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-04-30 21:27:43) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 1) [0m
+Completed in 78ms (View: 62, DB: 0) | 200 OK [http://localhost/topics/1]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-04-30 21:27:46) [GET]
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 15ms (View: 0, DB: 0) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-04-30 21:27:48) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 1) [0m
+Completed in 31ms (View: 15, DB: 0) | 200 OK [http://localhost/topics/1]
+
+
+Processing PostsController#create (for 127.0.0.1 at 2010-04-30 21:28:06) [POST]
+  Parameters: {"commit"=>"Create", "post"=>{"body"=>"woohoo it works", "subject"=>"test post"}, "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic_id"=>"1"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 1) [0m
+  [4;35;1mPost Create (0.0ms)[0m   [0mINSERT INTO "posts" ("created_at", "body", "updated_at", "subject", "topic_id") VALUES('2010-05-01 01:28:06', 'woohoo it works', '2010-05-01 01:28:06', 'test post', NULL)[0m
+Redirected to http://localhost:3000/posts/1
+Completed in 47ms (DB: 0) | 302 Found [http://localhost/topics/1/posts]
+
+
+Processing PostsController#show (for 127.0.0.1 at 2010-04-30 21:28:06) [GET]
+  Parameters: {"id"=>"1"}
+
+ActiveRecord::RecordNotFound (Couldn't find Topic without an ID):
+  app/controllers/posts_controller.rb:5:in `load_forum'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (125.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (not_found)
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-04-30 21:28:46) [GET]
+  Parameters: {"id"=>"1"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 1) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 1) [0m
+Completed in 31ms (View: 16, DB: 0) | 200 OK [http://localhost/topics/1]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-04-30 21:41:02) [GET]
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 32ms (View: 16, DB: 0) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#new (for 127.0.0.1 at 2010-04-30 21:41:03) [GET]
+Rendering template within layouts/topics
+Rendering topics/new
+Completed in 15ms (View: 0, DB: 0) | 200 OK [http://localhost/topics/new]
+
+
+Processing TopicsController#create (for 127.0.0.1 at 2010-04-30 21:41:18) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic"=>{"name"=>"test 2", "description"=>"I like pickles."}}
+  [4;35;1mTopic Create (0.0ms)[0m   [0mINSERT INTO "topics" ("name", "created_at", "updated_at", "description") VALUES('test 2', '2010-05-01 01:41:18', '2010-05-01 01:41:18', 'I like pickles.')[0m
+Redirected to http://localhost:3000/topics/2
+Completed in 31ms (DB: 0) | 302 Found [http://localhost/topics]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-04-30 21:41:18) [GET]
+  Parameters: {"id"=>"2"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 2) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 2) [0m
+Completed in 31ms (View: 15, DB: 0) | 200 OK [http://localhost/topics/2]
+
+
+Processing PostsController#create (for 127.0.0.1 at 2010-04-30 21:41:46) [POST]
+  Parameters: {"commit"=>"Create", "post"=>{"body"=>"I like pickles because pickles rock.", "subject"=>"Pickles Rock"}, "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic_id"=>"2"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 2) [0m
+  [4;35;1mPost Create (0.0ms)[0m   [0mINSERT INTO "posts" ("created_at", "body", "updated_at", "subject", "topic_id") VALUES('2010-05-01 01:41:46', 'I like pickles because pickles rock.', '2010-05-01 01:41:46', 'Pickles Rock', 2)[0m
+Redirected to http://localhost:3000/topics/2
+Completed in 78ms (DB: 0) | 302 Found [http://localhost/topics/2/posts]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-04-30 21:41:46) [GET]
+  Parameters: {"id"=>"2"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 2) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 2) [0m
+  [4;36;1mPost Load (0.0ms)[0m   [0;1mSELECT * FROM "posts" WHERE ("posts".topic_id = 2) [0m
+Completed in 31ms (View: 16, DB: 0) | 200 OK [http://localhost/topics/2]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-04-30 21:41:48) [GET]
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 110ms (View: 16, DB: 0) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-04-30 21:41:51) [GET]
+  Parameters: {"id"=>"2"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 2) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 2) [0m
+  [4;36;1mPost Load (0.0ms)[0m   [0;1mSELECT * FROM "posts" WHERE ("posts".topic_id = 2) [0m
+Completed in 31ms (View: 15, DB: 0) | 200 OK [http://localhost/topics/2]
+
+
+Processing PostsController#show (for 127.0.0.1 at 2010-04-30 21:41:54) [GET]
+  Parameters: {"id"=>"2", "topic_id"=>"2"}
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 2) [0m
+  [4;36;1mPost Load (0.0ms)[0m   [0;1mSELECT * FROM "posts" WHERE ("posts"."id" = 2 AND ("posts".topic_id = 2)) [0m
+Rendering template within layouts/posts
+Rendering posts/show
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 2) [0m
+Completed in 62ms (View: 31, DB: 0) | 200 OK [http://localhost/topics/2/posts/2]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-30 22:01:43) [GET]
+
+ActionController::RoutingError (No route matches "/forums" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-04-30 22:02:06) [GET]
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 31ms (View: 16, DB: 0) | 200 OK [http://localhost/topics]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-01 11:53:02) [GET]
+
+ActionController::RoutingError (No route matches "/forums" with {:method=>:get}):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 11:53:07) [GET]
+  Parameters: {"id"=>"2"}
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 2) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 2) [0m
+  [4;35;1mPost Load (0.0ms)[0m   [0mSELECT * FROM "posts" WHERE ("posts".topic_id = 2) [0m
+Completed in 45ms (View: 27, DB: 0) | 200 OK [http://localhost/topics/2]
+
+
+Processing PostsController#show (for 127.0.0.1 at 2010-05-01 11:53:09) [GET]
+  Parameters: {"id"=>"2", "topic_id"=>"2"}
+  [4;36;1mTopic Load (1.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 2) [0m
+  [4;35;1mPost Load (1.0ms)[0m   [0mSELECT * FROM "posts" WHERE ("posts"."id" = 2 AND ("posts".topic_id = 2)) [0m
+Rendering template within layouts/posts
+Rendering posts/show
+Completed in 48ms (View: 17, DB: 2) | 200 OK [http://localhost/topics/2/posts/2]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 11:53:12) [GET]
+  Parameters: {"id"=>"2"}
+  [4;36;1mTopic Load (1.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 2) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 2) [0m
+  [4;36;1mPost Load (1.0ms)[0m   [0;1mSELECT * FROM "posts" WHERE ("posts".topic_id = 2) [0m
+Completed in 44ms (View: 24, DB: 3) | 200 OK [http://localhost/topics/2]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 11:53:17) [GET]
+  [4;35;1mTopic Load (1.0ms)[0m   [0mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 32ms (View: 16, DB: 1) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#destroy (for 127.0.0.1 at 2010-05-01 15:59:16) [DELETE]
+  Parameters: {"authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "id"=>"1"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 1) [0m
+  [4;35;1mTopic Destroy (1.0ms)[0m   [0mDELETE FROM "topics" WHERE "id" = 1[0m
+Redirected to http://localhost:3000/topics
+Completed in 40ms (DB: 1) | 302 Found [http://localhost/topics/1]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 15:59:16) [GET]
+  [4;36;1mTopic Load (1.0ms)[0m   [0;1mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 27ms (View: 11, DB: 1) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#destroy (for 127.0.0.1 at 2010-05-01 15:59:19) [DELETE]
+  Parameters: {"authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "id"=>"2"}
+  [4;35;1mTopic Load (1.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 2) [0m
+  [4;36;1mTopic Destroy (2.0ms)[0m   [0;1mDELETE FROM "topics" WHERE "id" = 2[0m
+Redirected to http://localhost:3000/topics
+Completed in 26ms (DB: 3) | 302 Found [http://localhost/topics/2]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 15:59:19) [GET]
+  [4;35;1mTopic Load (1.0ms)[0m   [0mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 19ms (View: 3, DB: 1) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#new (for 127.0.0.1 at 2010-05-01 15:59:20) [GET]
+Rendering template within layouts/topics
+Rendering topics/new
+Completed in 23ms (View: 8, DB: 0) | 200 OK [http://localhost/topics/new]
+
+
+Processing TopicsController#create (for 127.0.0.1 at 2010-05-01 15:59:56) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic"=>{"name"=>"Topic 1", "description"=>"Test topic 1."}}
+  [4;36;1mTopic Create (2.0ms)[0m   [0;1mINSERT INTO "topics" ("name", "created_at", "updated_at", "description") VALUES('Topic 1', '2010-05-01 19:59:56', '2010-05-01 19:59:56', 'Test topic 1.')[0m
+Redirected to http://localhost:3000/topics/3
+Completed in 28ms (DB: 2) | 302 Found [http://localhost/topics]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 15:59:56) [GET]
+  Parameters: {"id"=>"3"}
+  [4;35;1mTopic Load (1.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 3) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 3) [0m
+Completed in 42ms (View: 25, DB: 1) | 200 OK [http://localhost/topics/3]
+
+
+Processing PostsController#create (for 127.0.0.1 at 2010-05-01 16:00:32) [POST]
+  Parameters: {"commit"=>"Create", "post"=>{"body"=>"test post 1", "subject"=>"This is a test topic post."}, "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic_id"=>"3"}
+  [4;35;1mTopic Load (1.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 3) [0m
+  [4;36;1mPost Create (2.0ms)[0m   [0;1mINSERT INTO "posts" ("created_at", "body", "updated_at", "subject", "topic_id") VALUES('2010-05-01 20:00:32', 'test post 1', '2010-05-01 20:00:32', 'This is a test topic post.', 3)[0m
+Redirected to http://localhost:3000/topics/3
+Completed in 44ms (DB: 3) | 302 Found [http://localhost/topics/3/posts]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 16:00:32) [GET]
+  Parameters: {"id"=>"3"}
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 3) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 3) [0m
+  [4;35;1mPost Load (0.0ms)[0m   [0mSELECT * FROM "posts" WHERE ("posts".topic_id = 3) [0m
+Completed in 128ms (View: 111, DB: 0) | 200 OK [http://localhost/topics/3]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 16:00:35) [GET]
+  [4;36;1mTopic Load (1.0ms)[0m   [0;1mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 27ms (View: 10, DB: 1) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#new (for 127.0.0.1 at 2010-05-01 16:00:38) [GET]
+Rendering template within layouts/topics
+Rendering topics/new
+Completed in 24ms (View: 7, DB: 0) | 200 OK [http://localhost/topics/new]
+
+
+Processing TopicsController#create (for 127.0.0.1 at 2010-05-01 16:00:53) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic"=>{"name"=>"Test Topic 2", "description"=>"This is test topic 2."}}
+  [4;35;1mTopic Create (2.0ms)[0m   [0mINSERT INTO "topics" ("name", "created_at", "updated_at", "description") VALUES('Test Topic 2', '2010-05-01 20:00:53', '2010-05-01 20:00:53', 'This is test topic 2.')[0m
+Redirected to http://localhost:3000/topics/4
+Completed in 36ms (DB: 2) | 302 Found [http://localhost/topics]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 16:00:53) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 4) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 4) [0m
+Completed in 43ms (View: 24, DB: 1) | 200 OK [http://localhost/topics/4]
+
+
+Processing PostsController#create (for 127.0.0.1 at 2010-05-01 16:01:12) [POST]
+  Parameters: {"commit"=>"Create", "post"=>{"body"=>"Test post for topic 2.", "subject"=>"This is a test topic post."}, "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic_id"=>"4"}
+  [4;36;1mTopic Load (1.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 4) [0m
+  [4;35;1mPost Create (2.0ms)[0m   [0mINSERT INTO "posts" ("created_at", "body", "updated_at", "subject", "topic_id") VALUES('2010-05-01 20:01:12', 'Test post for topic 2.', '2010-05-01 20:01:12', 'This is a test topic post.', 4)[0m
+Redirected to http://localhost:3000/topics/4
+Completed in 43ms (DB: 3) | 302 Found [http://localhost/topics/4/posts]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 16:01:12) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 4) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 4) [0m
+  [4;36;1mPost Load (0.0ms)[0m   [0;1mSELECT * FROM "posts" WHERE ("posts".topic_id = 4) [0m
+Completed in 42ms (View: 25, DB: 0) | 200 OK [http://localhost/topics/4]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 16:01:14) [GET]
+  [4;35;1mTopic Load (1.0ms)[0m   [0mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 32ms (View: 16, DB: 1) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#new (for 127.0.0.1 at 2010-05-01 16:01:16) [GET]
+Rendering template within layouts/topics
+Rendering topics/new
+Completed in 24ms (View: 8, DB: 0) | 200 OK [http://localhost/topics/new]
+
+
+Processing TopicsController#edit (for 127.0.0.1 at 2010-05-01 16:01:21) [GET]
+  Parameters: {"id"=>"4"}
+  [4;36;1mTopic Load (1.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 4) [0m
+Rendering template within layouts/topics
+Rendering topics/edit
+Completed in 33ms (View: 16, DB: 1) | 200 OK [http://localhost/topics/4/edit]
+
+
+Processing TopicsController#update (for 127.0.0.1 at 2010-05-01 16:01:26) [PUT]
+  Parameters: {"commit"=>"Update", "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic"=>{"name"=>"Topic 2", "description"=>"This is test topic 2."}, "id"=>"4"}
+  [4;35;1mTopic Load (1.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 4) [0m
+  [4;36;1mTopic Update (1.0ms)[0m   [0;1mUPDATE "topics" SET "updated_at" = '2010-05-01 20:01:26', "name" = 'Topic 2' WHERE "id" = 4[0m
+Redirected to http://localhost:3000/topics/4
+Completed in 114ms (DB: 2) | 302 Found [http://localhost/topics/4]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 16:01:27) [GET]
+  Parameters: {"id"=>"4"}
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 4) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 4) [0m
+  [4;35;1mPost Load (0.0ms)[0m   [0mSELECT * FROM "posts" WHERE ("posts".topic_id = 4) [0m
+Completed in 43ms (View: 26, DB: 0) | 200 OK [http://localhost/topics/4]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 16:01:29) [GET]
+  [4;36;1mTopic Load (1.0ms)[0m   [0;1mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 31ms (View: 15, DB: 1) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#new (for 127.0.0.1 at 2010-05-01 16:01:32) [GET]
+Rendering template within layouts/topics
+Rendering topics/new
+Completed in 24ms (View: 8, DB: 0) | 200 OK [http://localhost/topics/new]
+
+
+Processing TopicsController#create (for 127.0.0.1 at 2010-05-01 16:01:48) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic"=>{"name"=>"Topic 3", "description"=>"This is test topic 3."}}
+  [4;35;1mTopic Create (2.0ms)[0m   [0mINSERT INTO "topics" ("name", "created_at", "updated_at", "description") VALUES('Topic 3', '2010-05-01 20:01:48', '2010-05-01 20:01:48', 'This is test topic 3.')[0m
+Redirected to http://localhost:3000/topics/5
+Completed in 28ms (DB: 2) | 302 Found [http://localhost/topics]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 16:01:48) [GET]
+  Parameters: {"id"=>"5"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 5) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 5) [0m
+Completed in 41ms (View: 24, DB: 0) | 200 OK [http://localhost/topics/5]
+
+
+Processing PostsController#create (for 127.0.0.1 at 2010-05-01 16:02:03) [POST]
+  Parameters: {"commit"=>"Create", "post"=>{"body"=>"test post", "subject"=>"This is a test topic post."}, "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic_id"=>"5"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 5) [0m
+  [4;35;1mPost Create (1.0ms)[0m   [0mINSERT INTO "posts" ("created_at", "body", "updated_at", "subject", "topic_id") VALUES('2010-05-01 20:02:03', 'test post', '2010-05-01 20:02:03', 'This is a test topic post.', 5)[0m
+Redirected to http://localhost:3000/topics/5
+Completed in 43ms (DB: 1) | 302 Found [http://localhost/topics/5/posts]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 16:02:03) [GET]
+  Parameters: {"id"=>"5"}
+  [4;36;1mTopic Load (1.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 5) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 5) [0m
+  [4;36;1mPost Load (1.0ms)[0m   [0;1mSELECT * FROM "posts" WHERE ("posts".topic_id = 5) [0m
+Completed in 43ms (View: 24, DB: 3) | 200 OK [http://localhost/topics/5]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 16:02:05) [GET]
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 36ms (View: 20, DB: 0) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#new (for 127.0.0.1 at 2010-05-01 16:02:07) [GET]
+Rendering template within layouts/topics
+Rendering topics/new
+Completed in 24ms (View: 7, DB: 0) | 200 OK [http://localhost/topics/new]
+
+
+Processing TopicsController#create (for 127.0.0.1 at 2010-05-01 16:02:22) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic"=>{"name"=>"Topic 4", "description"=>"This is test topic 4."}}
+  [4;36;1mTopic Create (2.0ms)[0m   [0;1mINSERT INTO "topics" ("name", "created_at", "updated_at", "description") VALUES('Topic 4', '2010-05-01 20:02:22', '2010-05-01 20:02:22', 'This is test topic 4.')[0m
+Redirected to http://localhost:3000/topics/6
+Completed in 115ms (DB: 2) | 302 Found [http://localhost/topics]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 16:02:22) [GET]
+  Parameters: {"id"=>"6"}
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 6) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 6) [0m
+Completed in 41ms (View: 23, DB: 1) | 200 OK [http://localhost/topics/6]
+
+
+Processing PostsController#create (for 127.0.0.1 at 2010-05-01 16:02:38) [POST]
+  Parameters: {"commit"=>"Create", "post"=>{"body"=>"This is a post for topic 4.", "subject"=>"This is a test topic post."}, "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic_id"=>"6"}
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 6) [0m
+  [4;36;1mPost Create (1.0ms)[0m   [0;1mINSERT INTO "posts" ("created_at", "body", "updated_at", "subject", "topic_id") VALUES('2010-05-01 20:02:38', 'This is a post for topic 4.', '2010-05-01 20:02:38', 'This is a test topic post.', 6)[0m
+Redirected to http://localhost:3000/topics/6
+Completed in 44ms (DB: 1) | 302 Found [http://localhost/topics/6/posts]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 16:02:38) [GET]
+  Parameters: {"id"=>"6"}
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 6) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 6) [0m
+  [4;35;1mPost Load (1.0ms)[0m   [0mSELECT * FROM "posts" WHERE ("posts".topic_id = 6) [0m
+Completed in 43ms (View: 24, DB: 2) | 200 OK [http://localhost/topics/6]
+
+
+Processing PostsController#create (for 127.0.0.1 at 2010-05-01 16:02:55) [POST]
+  Parameters: {"commit"=>"Create", "post"=>{"body"=>"Post post post", "subject"=>"This is a post"}, "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic_id"=>"6"}
+  [4;36;1mTopic Load (1.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 6) [0m
+  [4;35;1mPost Create (1.0ms)[0m   [0mINSERT INTO "posts" ("created_at", "body", "updated_at", "subject", "topic_id") VALUES('2010-05-01 20:02:55', 'Post post post', '2010-05-01 20:02:55', 'This is a post', 6)[0m
+Redirected to http://localhost:3000/topics/6
+Completed in 44ms (DB: 2) | 302 Found [http://localhost/topics/6/posts]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 16:02:55) [GET]
+  Parameters: {"id"=>"6"}
+  [4;36;1mTopic Load (0.0ms)[0m   [0;1mSELECT * FROM "topics" WHERE ("topics"."id" = 6) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;35;1mSQL (1.0ms)[0m   [0mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 6) [0m
+  [4;36;1mPost Load (1.0ms)[0m   [0;1mSELECT * FROM "posts" WHERE ("posts".topic_id = 6) [0m
+Completed in 43ms (View: 24, DB: 2) | 200 OK [http://localhost/topics/6]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 16:02:57) [GET]
+  [4;35;1mTopic Load (1.0ms)[0m   [0mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 41ms (View: 24, DB: 1) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#new (for 127.0.0.1 at 2010-05-01 16:02:59) [GET]
+Rendering template within layouts/topics
+Rendering topics/new
+Completed in 24ms (View: 8, DB: 0) | 200 OK [http://localhost/topics/new]
+
+
+Processing TopicsController#create (for 127.0.0.1 at 2010-05-01 16:03:11) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic"=>{"name"=>"Topic 5", "description"=>"This is test topic 5."}}
+  [4;36;1mTopic Create (2.0ms)[0m   [0;1mINSERT INTO "topics" ("name", "created_at", "updated_at", "description") VALUES('Topic 5', '2010-05-01 20:03:11', '2010-05-01 20:03:11', 'This is test topic 5.')[0m
+Redirected to http://localhost:3000/topics/7
+Completed in 28ms (DB: 2) | 302 Found [http://localhost/topics]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 16:03:11) [GET]
+  Parameters: {"id"=>"7"}
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 7) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 7) [0m
+Completed in 41ms (View: 25, DB: 0) | 200 OK [http://localhost/topics/7]
+
+
+Processing PostsController#create (for 127.0.0.1 at 2010-05-01 16:03:25) [POST]
+  Parameters: {"commit"=>"Create", "post"=>{"body"=>"This is a test post for topic 5.", "subject"=>"This is a test topic post."}, "authenticity_token"=>"BwXQ239sBURBXtSHP7KlB86ZMnwTSSQ9TW/jNip9kGQ=", "topic_id"=>"7"}
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 7) [0m
+  [4;36;1mPost Create (2.0ms)[0m   [0;1mINSERT INTO "posts" ("created_at", "body", "updated_at", "subject", "topic_id") VALUES('2010-05-01 20:03:25', 'This is a test post for topic 5.', '2010-05-01 20:03:25', 'This is a test topic post.', 7)[0m
+Redirected to http://localhost:3000/topics/7
+Completed in 48ms (DB: 2) | 302 Found [http://localhost/topics/7/posts]
+
+
+Processing TopicsController#show (for 127.0.0.1 at 2010-05-01 16:03:25) [GET]
+  Parameters: {"id"=>"7"}
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" WHERE ("topics"."id" = 7) [0m
+Rendering template within layouts/topics
+Rendering topics/show
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSELECT count(*) AS count_all FROM "posts" WHERE ("posts".topic_id = 7) [0m
+  [4;35;1mPost Load (1.0ms)[0m   [0mSELECT * FROM "posts" WHERE ("posts".topic_id = 7) [0m
+Completed in 43ms (View: 24, DB: 2) | 200 OK [http://localhost/topics/7]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 16:03:28) [GET]
+  [4;36;1mTopic Load (1.0ms)[0m   [0;1mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 46ms (View: 30, DB: 1) | 200 OK [http://localhost/topics]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 16:10:08) [GET]
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 47ms (View: 31, DB: 0) | 200 OK [http://localhost/topics]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-01 16:12:39) [GET]
+
+NameError (uninitialized constant ForumsController):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (31.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-05-01 16:12:50) [GET]
+
+NameError (uninitialized constant ForumsController):
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (109.0ms)
+Rendered rescues/_request_and_response (0.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 16:13:01) [GET]
+  [4;36;1mTopic Load (15.0ms)[0m   [0;1mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 31ms (View: 16, DB: 15) | 200 OK [http://localhost/]
+
+
+Processing TopicsController#index (for 127.0.0.1 at 2010-05-01 16:13:03) [GET]
+  [4;35;1mTopic Load (0.0ms)[0m   [0mSELECT * FROM "topics" [0m
+Rendering template within layouts/topics
+Rendering topics/index
+Completed in 47ms (View: 31, DB: 0) | 200 OK [http://localhost/]

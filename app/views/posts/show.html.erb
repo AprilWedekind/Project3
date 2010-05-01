@@ -1,0 +1,19 @@
+<p>
+  <b>Topic:</b>
+  <%=h @topic.name %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%=h @post.subject %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%=h @post.body %>
+</p>
+
+
+<%= link_to 'Edit', [:edit, @topic, @post] %> |
+<%= link_to 'Destroy', [@topic, @post], :confirm => 'Are you sure?', :method => :delete %> |
+<%= link_to 'Back', topic_path(@topic) %>
